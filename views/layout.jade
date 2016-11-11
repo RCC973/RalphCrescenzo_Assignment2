@@ -1,5 +1,8 @@
 doctype html
 html
+  block link
+      -var selected = 'Home';
+    -var menu = { 'Home' : '/', 'List' : '/locations', 'Editor' : '/locations/editor' };
   head
     title= title
     meta(charset="utf-8")
@@ -23,12 +26,12 @@ html
         #navbar.navbar-collapse.collapse
             .navbar-right
               ul.nav.navbar-nav
-                li.active
-                  a(href='/') Home
-                li
-                  a(href='/locations') List
-                li
-                  a(href='/locations/editor') Editor
+                each val, key in menu
+                  li
+                    if selected === key
+                      a.selected(href=val, title=key)= key.active
+                    else
+                      a(href=val, title=key)= key
   body
     block content
 
